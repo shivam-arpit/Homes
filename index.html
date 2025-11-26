@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collection Workbench — Mock</title>
+  <style>
+    :root{
+      --sidebar:#0f1720; --muted:#98a6b0; --card:#fff; --bg:#f3f6f8; --panel-border:#e9eef2;
+      --accent:#eef4f7; --success:#2ea86a; --danger:#d64545; --accent-2:#ffd966;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, Roboto, Arial, sans-serif;background:var(--bg);color:#0b2230}
+    .app{display:flex;min-height:100vh}
+
+    /* sidebar */
+    aside.sidebar{width:240px;background:var(--sidebar);color:#d6e6ef;padding:28px 18px;display:flex;flex-direction:column}
+    .brand{font-weight:700;font-size:20px;margin-bottom:18px}
+    .nav{display:flex;flex-direction:column;gap:10px}
+    .nav a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;color:#accbd7;text-decoration:none}
+    .nav a.active{background:#14232b;color:#fff}
+    .nav a .ico{width:20px;height:20px;background:rgba(255,255,255,0.04);border-radius:6px}
+    .sidebar .footer{margin-top:auto;font-size:12px;color:#9fb0bd}
+
+    /* main */
+    .main{flex:1;display:flex;flex-direction:column}
+    .topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#fff;border-bottom:1px solid var(--panel-border)}
+    .topbar .left{display:flex;align-items:center;gap:14px}
+    .topbar input.search{padding:8px 12px;border-radius:12px;border:1px solid var(--panel-border);width:360px}
+    .topbar .icons{display:flex;gap:12px;align-items:center}
+
+    .container{padding:24px;max-width:1200px;margin:0 auto;width:100%}
+    h1{margin:0 0 6px 0}
+    .subtitle{color:var(--muted);font-size:13px;margin-bottom:12px}
+
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+    .kpi{background:var(--card);padding:16px;border-radius:10px;border:1px solid var(--panel-border)}
+    .kpi .label{color:var(--muted);font-size:13px}
+    .kpi .value{font-weight:800;font-size:20px;margin-top:6px}
+    .kpi .delta{font-size:13px;margin-top:6px}
+
+    .charts-row{display:grid;grid-template-columns:1fr 360px;gap:12px;margin-top:12px}
+    .panel{background:var(--card);border:1px solid var(--panel-border);border-radius:10px;padding:14px}
+    .panel h3{margin:0 0 8px 0}
+
+    .grid-table{margin-top:12px}
+    table{width:100%;border-collapse:collapse}
+    thead th{padding:10px;text-align:left;color:#6b7780;border-bottom:2px solid var(--panel-border)}
+    tbody td{padding:10px;border-top:1px solid var(--panel-border)}
+
+    .summary-row{display:flex;gap:12px;margin-top:12px}
+    .small{font-size:13px;color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    /* footer chart section */
+    .footer-charts{margin-top:18px}
+
+    @media (max-width:1100px){
+      .container{padding:12px}
+      .kpi-row{grid-template-columns:repeat(2,1fr)}
+      .charts-row{grid-template-columns:1fr}
+    }
+  </style>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Amagi AR</div>
+     <nav class="nav">
+  <a class="active" href="index.html"> <span class="ico"></span> Home</a>
+  <a href="inbox/inbox.html"> <span class="ico"></span> Inbox</a>
+  <a href="Transaction/Transaction.html"> <span class="ico"></span> Transactions</a>
+  <a href="customer/customer-details.html"> <span class="ico"></span> Customers</a>
+  <a href="Collections/collection.html"> <span class="ico"></span> Collections</a>
+  <a href="Cashapp/main.html"> <span class="ico"></span> Cash App</a>
+</nav>
+      <div class="footer">© Company • v1.0</div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="left"><div class="small">Collection Workbench</div></div>
+        <input class="search" placeholder="Search..." />
+        <div class="icons">
+          <button style="border-radius:8px;padding:8px;border:1px solid var(--panel-border);background:var(--card);cursor:pointer">↻</button>
+          <div style="width:36px;height:36px;background:#2d8bd6;border-radius:999px;color:#fff;display:flex;align-items:center;justify-content:center">AD</div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h1>Collection Workbench</h1>
+        <div class="subtitle">Overview of collection performance and receivables</div>
+
+        <!-- KPI row -->
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="label">Total Balance</div>
+            <div class="value">$2,456,789</div>
+            <div class="delta small">+8.4% vs last month</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Quarter</div>
+            <div class="value">$1,845,123</div>
+            <div class="delta small">-2.1% vs prev</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Total Collections</div>
+            <div class="value">$845,123</div>
+            <div class="delta small">+4.7% MoM</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Current Dues</div>
+            <div class="value">$611,666</div>
+            <div class="delta small">+1.3% last 7d</div>
+          </div>
+        </div>
+
+        <!-- charts + side panel -->
+        <div class="charts-row">
+          <div>
+            <div class="panel">
+              <h3>Overdue Invoices by Aging Buckets</h3>
+              <canvas id="agingBar" height="160"></canvas>
+              <div class="summary-row">
+                <div style="flex:1"><div class="small">0-30</div><div style="font-weight:700">$25,000</div></div>
+                <div style="flex:1"><div class="small">31-60</div><div style="font-weight:700">$75,000</div></div>
+                <div style="flex:1"><div class="small">61-90</div><div style="font-weight:700">$220,000</div></div>
+                <div style="flex:1"><div class="small">91-120</div><div style="font-weight:700">$160,000</div></div>
+              </div>
+            </div>
+
+            <div class="panel grid-table" style="margin-top:12px">
+              <h3>Sales vs Collections Analysis</h3>
+              <table>
+                <thead>
+                  <tr><th>Month</th><th>Gross Sales</th><th>Collections</th><th>Performance</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Mar 2025</td><td>$487,713,926</td><td style="color:green">$220,329,125</td><td>45%</td></tr>
+                  <tr><td>Feb 2025</td><td>$350,000,000</td><td style="color:green">$190,000,000</td><td>54%</td></tr>
+                  <tr><td>Jan 2025</td><td>$267,384,801</td><td style="color:orange">$150,000,000</td><td>56%</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="panel footer-charts" style="margin-top:12px">
+              <h3>DSO Trend Analysis</h3>
+              <canvas id="dsoTrend" height="140"></canvas>
+            </div>
+          </div>
+
+          <aside style="width:360px;display:flex;flex-direction:column;gap:12px">
+            <div class="panel">
+              <h3>Receivables by Collection Status</h3>
+              <canvas id="statusPie" height="220"></canvas>
+            </div>
+
+            <div class="panel">
+              <h3>Top Metrics</h3>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div class="small"><strong>Total Balance</strong><div class="small muted">$2,456,789</div></div>
+                <div class="small"><strong>Current DSO</strong><div class="small muted">45 Days</div></div>
+                <div class="small"><strong>Collection Ratio</strong><div class="small muted">75.1%</div></div>
+              </div>
+            </div>
+
+            
+          </aside>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Aging bar chart
+    const agingCtx = document.getElementById('agingBar').getContext('2d');
+    new Chart(agingCtx, {
+      type: 'bar',
+      data: {
+        labels: ['0-30','31-60','61-90','91-120','121-180','>180'],
+        datasets: [{
+          label: 'Overdue',
+          data: [25000,75000,220000,160000,60000,40000],
+          backgroundColor: ['#28a745','#2d8bd6','#f7b500','#ff6347','#6f42c1','#d9534f']
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(v) {
+                return '$' + (v/1000) + 'k';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Pie chart for collection status
+    const pieCtx = document.getElementById('statusPie').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Current','Dunning','Dispute','Escalation','Other'],
+        datasets: [{
+          data: [45,20,15,12,8],
+          backgroundColor: ['#2d8bd6','#ffd966','#ff6b6b','#6f42c1','#8bd99b']
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            position: 'right'
+          }
+        }
+      }
+    });
+
+    // DSO trend mixed chart (bar + line)
+    const dsoCtx = document.getElementById('dsoTrend').getContext('2d');
+    new Chart(dsoCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May'],
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Collections',
+            data: [120,150,180,160,200],
+            backgroundColor: '#2d8bd6'
+          },
+          {
+            type: 'line',
+            label: 'DSO',
+            data: [52,48,45,50,47],
+            borderColor: '#ff6347',
+            tension: 0.3,
+            fill: false,
+            yAxisID: 'dsoAxis'
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          },
+          dsoAxis: {
+            position: 'right',
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
